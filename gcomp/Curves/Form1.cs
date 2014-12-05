@@ -32,6 +32,8 @@ namespace Curves
         Graphics g;
         private void button1_Click(object sender, EventArgs e)
         {
+            //probabil un g.Flush() aici si/sau o stergere totala a listei cu puncte.
+
             // how many points do you need on the curve?
             const int POINTS_ON_CURVE = 1000;
 
@@ -59,6 +61,15 @@ namespace Curves
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            //g.Clear(Color.Azure);  
+            
+            //TO DO:  reset form.
+            
         }
     }
 }
