@@ -36,16 +36,18 @@ namespace Curves
             this.label4 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Azure;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Size = new System.Drawing.Size(357, 483);
+            this.pictureBox1.Size = new System.Drawing.Size(357, 476);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
@@ -103,7 +105,7 @@ namespace Curves
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(375, 173);
+            this.button3.Location = new System.Drawing.Point(375, 440);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(158, 48);
             this.button3.TabIndex = 7;
@@ -119,12 +121,29 @@ namespace Curves
             this.button2.TabIndex = 8;
             this.button2.Text = "Input";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "coordonatele introduse:",
+            "x1,y1",
+            "x2,y2",
+            "...",
+            "...",
+            "[TODO]"});
+            this.listBox1.Location = new System.Drawing.Point(375, 207);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(158, 199);
+            this.listBox1.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 500);
+            this.ClientSize = new System.Drawing.Size(548, 500);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label4);
@@ -152,6 +171,7 @@ namespace Curves
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

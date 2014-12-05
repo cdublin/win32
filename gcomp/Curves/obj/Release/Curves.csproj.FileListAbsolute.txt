@@ -6,5 +6,11 @@ C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Release\C
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Release\Curves.csproj.GenerateResource.Cache
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Release\Curves.exe
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Release\Curves.pdb
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\bin\Release\Curves.exe
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\bin\Release\Curves.pdb
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Curves.Form1.resources
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Curves.Properties.Resources.resources
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Curves.csproj.GenerateResource.Cache
 C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Curves.exe
 C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Curves.pdb
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Curves.csprojResolveAssemblyReference.cache

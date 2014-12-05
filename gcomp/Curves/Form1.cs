@@ -16,6 +16,7 @@ namespace Curves
         public Form1()
         {
             InitializeComponent();
+            new ToolTip().SetToolTip(pictureBox1, "click for new points then push 'FIT BEZIER'");
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -32,7 +33,7 @@ namespace Curves
         Graphics g;
         private void button1_Click(object sender, EventArgs e)
         {
-            //probabil un g.Flush() aici si/sau o stergere totala a listei cu puncte.
+            
 
             // how many points do you need on the curve?
             const int POINTS_ON_CURVE = 1000;
@@ -66,10 +67,25 @@ namespace Curves
         private void button3_Click(object sender, EventArgs e)
         {
 
-            //g.Clear(Color.Azure);  
+            g.Clear(Color.Azure);  
             
-            //TO DO:  reset form.
+            //TO DO: reset form.
+
+            //probabil un g.Flush() aici si/sau o stergere totala a listei cu puncte.
+
+            ptList.Clear();
+
+            //DONE.
+            
             
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //form separat aici
+            MessageBox.Show("[TO DO: input] - cu un form separat");
+        }
+
+       
     }
 }
