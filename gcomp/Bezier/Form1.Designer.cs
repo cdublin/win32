@@ -1,4 +1,4 @@
-namespace Curves
+namespace Bezier
 {
     partial class Form1
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Curves
+namespace Bezier
 {
     static class Program
     {

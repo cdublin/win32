@@ -8,8 +8,8 @@
     <ProjectGuid>{E8A84224-9B83-48A9-A7F8-BAE16ED150BE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Curves</RootNamespace>
-    <AssemblyName>Curves</AssemblyName>
+    <RootNamespace>Bezier</RootNamespace>
+    <AssemblyName>Bezier</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>

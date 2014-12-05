@@ -1,0 +1,9 @@
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\bin\Release\Bezier.exe
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\bin\Release\Bezier.pdb
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.Form1.resources
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.Properties.Resources.resources
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.csproj.GenerateResource.Cache
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.exe
+C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.pdb
+C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.exe
+C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.pdb
