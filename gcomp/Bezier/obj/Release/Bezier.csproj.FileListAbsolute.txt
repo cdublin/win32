@@ -7,3 +7,11 @@ C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.exe
 C:\Users\cosmin\Documents\git\win32\gcomp\Curves\obj\Release\Bezier.pdb
 C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.exe
 C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.pdb
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\bin\Release\Bezier.exe.config
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\bin\Release\Bezier.exe
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\bin\Release\Bezier.pdb
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.Form1.resources
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.Properties.Resources.resources
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.csproj.GenerateResource.Cache
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.exe
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.pdb
