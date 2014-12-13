@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Bezier
 
-    //TODO: comentat algoritmul  ("Bernstein / De Casteljau")
+    
+    //("forma Bernstein a curbelor Bezier - /documentatie/Computationala_pag_18.pdf")
 {
     class BezierCurve
     {
