@@ -23,6 +23,7 @@ namespace Bezier
             tp.AutoPopDelay = 2000;
             tp.SetToolTip(pictureBox1, "click for new points then push 'FIT BEZIER' \n (32 max)");
 
+
         }
 
         //desenare puncte
@@ -44,7 +45,10 @@ namespace Bezier
             //p = cordonatele actuale ale pozitiei mouse-ului in picturebox 
             Point p = pictureBox1.PointToClient(Cursor.Position);
             // status label updatat sa afiseze x si y
-            toolStripStatusLabel2.Text = "X = " + p.X.ToString() + " Y = " + p.Y.ToString();
+            toolStripStatusLabel2.Text = "X = " + p.X.ToString() + " Y = " + (pictureBox1.Height - p.Y).ToString();
+            //(pictureBox1.Height - p.Y) = trecerea din cadranul IV (specific gdi+) in cadranul I
+
+
             // refresh pentru a nu ramane blocat pe coordonatele precedente
             statusStrip1.Refresh();
         }
@@ -54,7 +58,7 @@ namespace Bezier
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             Point p = pictureBox1.PointToClient(Cursor.Position);
-            toolStripStatusLabel2.Text = "X = " + p.X.ToString() + " Y = " + p.Y.ToString();
+            toolStripStatusLabel2.Text = "X = " + p.X.ToString() + " Y = " + (pictureBox1.Height - p.Y).ToString();
             statusStrip1.Refresh();
             
         }
@@ -96,6 +100,7 @@ namespace Bezier
         private void Form1_Load(object sender, EventArgs e)
         {
             g = Graphics.FromHwnd(pictureBox1.Handle);
+
             
             
         }
@@ -109,9 +114,30 @@ namespace Bezier
         private void button3_Click(object sender, EventArgs e)
         {
 
-            g.Clear(Color.Azure);  
+            g.Clear(Color.Azure);
+
+            //redesenam grid-ul
+
+            Pen p = new Pen(Color.DarkGray);
+            for (int y = 0; y < pictureBox1.Size.Height; ++y)
+            {
+                int tmp = y * 50;
+                g.DrawLine(p, 0, y * 50, pictureBox1.Size.Width * 50, y * 50);
+                g.DrawString((pictureBox1.Size.Height - tmp).ToString(), this.Font, Brushes.Black, 0, y * 50);
+            }
+
+            // "0"
+            g.DrawString("0", this.Font, Brushes.Black, 0, pictureBox1.Height - this.Font.Height);
+
+            for (int x = 0; x < pictureBox1.Size.Width; ++x)
+            {
+                g.DrawLine(p, x * 50, 0, x * 50, pictureBox1.Size.Height * 50);
+                if (x != 1) g.DrawString((x * 50).ToString(), this.Font, Brushes.Black, x * 50 - 21, pictureBox1.Height - this.Font.Height);
+                else //hack pt afisare corecta "50"
+                    g.DrawString((x * 50).ToString(), this.Font, Brushes.Black, x * 50 - 15, pictureBox1.Height - this.Font.Height);
+
+            }
             
-            //TO DO: reset form. probabil un g.Flush() aici si/sau o stergere totala a listei cu puncte.
 
             ptList.Clear();
 
@@ -139,19 +165,38 @@ namespace Bezier
  */
 
         //TODO: grid initial:
-        //private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        //{
-        //    Pen p = new Pen(Color.Gray);
-        //    for (int y = 0; y < pictureBox1.Size.Height; ++y)
-        //    {
-        //        g.DrawLine(p, 0, y *5, pictureBox1.Size.Width *5, y *5);
-        //    }
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
 
-        //    for (int x = 0; x < pictureBox1.Size.Width; ++x)
-        //    {
-        //        g.DrawLine(p, x *5, 0, x *5, pictureBox1.Size.Height *5);
-        //    }
-        //}
+            //grid:
+
+            Pen p = new Pen(Color.DarkGray);
+            for (int y = 0; y < pictureBox1.Size.Height; ++y)
+            {
+                int tmp = y * 50;
+                e.Graphics.DrawLine(p, 0, y * 50, pictureBox1.Size.Width * 50, y * 50);
+                e.Graphics.DrawString((pictureBox1.Size.Height - tmp).ToString(), this.Font, Brushes.Black, 0, y * 50);
+            }
+
+            
+            // "0"
+            e.Graphics.DrawString("0", this.Font, Brushes.Black, 0, pictureBox1.Height - this.Font.Height);
+
+            for (int x = 0; x < pictureBox1.Size.Width; ++x)
+            {
+                e.Graphics.DrawLine(p, x * 50, 0, x * 50, pictureBox1.Size.Height * 50);
+                if (x!=1) e.Graphics.DrawString((x * 50).ToString(), this.Font, Brushes.Black, x * 50 - 21, pictureBox1.Height - this.Font.Height); 
+                    else //hack pt afisare corecta "50"
+                    e.Graphics.DrawString((x * 50).ToString(), this.Font, Brushes.Black, x * 50 - 15, pictureBox1.Height - this.Font.Height);
+
+            }
+
+
+
+
+            //g.DrawString(pictureBox1.Width.ToString(), this.Font, Brushes.Black, 0, pictureBox1.Height-20);
+            //g.DrawString(pictureBox1.Height.ToString(), this.Font, Brushes.Black, pictureBox1.Width-20, 0);
+        }
 
         /* daca pictureBox1_Paint e comentata aici atunci trebuie
          comentata si in Form1.Designer.cs la linia 57 

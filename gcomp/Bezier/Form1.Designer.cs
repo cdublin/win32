@@ -51,10 +51,10 @@ namespace Bezier
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Size = new System.Drawing.Size(357, 476);
+            this.pictureBox1.Size = new System.Drawing.Size(500, 500); 
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-//            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
@@ -62,7 +62,7 @@ namespace Bezier
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(375, 65);
+            this.button1.Location = new System.Drawing.Point(534, 72);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(158, 48);
             this.button1.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace Bezier
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(459, 0);
+            this.label1.Location = new System.Drawing.Point(602, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 31);
             this.label1.TabIndex = 2;
@@ -87,7 +87,7 @@ namespace Bezier
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(459, 31);
+            this.label2.Location = new System.Drawing.Point(602, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 31);
             this.label2.TabIndex = 3;
@@ -96,7 +96,7 @@ namespace Bezier
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(378, 12);
+            this.label3.Location = new System.Drawing.Point(531, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 4;
@@ -105,7 +105,7 @@ namespace Bezier
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(378, 43);
+            this.label4.Location = new System.Drawing.Point(531, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 5;
@@ -113,9 +113,9 @@ namespace Bezier
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(375, 440);
+            this.button3.Location = new System.Drawing.Point(534, 463);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(158, 48);
+            this.button3.Size = new System.Drawing.Size(158, 49);
             this.button3.TabIndex = 7;
             this.button3.Text = "Reset";
             this.button3.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@ namespace Bezier
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(375, 120);
+            this.button2.Location = new System.Drawing.Point(534, 136);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(158, 47);
             this.button2.TabIndex = 8;
@@ -141,9 +141,9 @@ namespace Bezier
             "...",
             "...",
             "[TODO]"});
-            this.listBox1.Location = new System.Drawing.Point(375, 207);
+            this.listBox1.Location = new System.Drawing.Point(534, 203);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(158, 199);
+            this.listBox1.Size = new System.Drawing.Size(158, 251);
             this.listBox1.TabIndex = 9;
             // 
             // statusStrip1
@@ -151,9 +151,9 @@ namespace Bezier
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 495);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(548, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -172,7 +172,7 @@ namespace Bezier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 517);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
