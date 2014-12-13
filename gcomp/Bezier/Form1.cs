@@ -34,6 +34,7 @@ namespace Bezier
             ptList.Add(e.Y);
 
             g.DrawRectangle(px, new Rectangle(e.X, e.Y, 2, 2));
+            //g.DrawString()
             
         }
 
@@ -95,6 +96,14 @@ namespace Bezier
                 g.DrawRectangle(newpx, new Rectangle((int)p[i + 1], (int)p[i], 1, 1));
                 Application.DoEvents();
             }
+
+
+           //freehand
+           ptList.Clear(); 
+            
+ 
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -114,35 +123,46 @@ namespace Bezier
         private void button3_Click(object sender, EventArgs e)
         {
 
-            g.Clear(Color.Azure);
+            
 
-            //redesenam grid-ul
+            //Reset
+            //redesenam grid-ul si background-ul
+            //in design pictureBox1 ramane fix pls altfel trebuiesc refacute in totalitate for-urile urmatoare:
+
+
+            g.Clear(Color.Azure);
 
             Pen p = new Pen(Color.DarkGray);
             for (int y = 0; y < pictureBox1.Size.Height; ++y)
             {
-                int tmp = y * 50;
+                // linii orizontale din 50 in 50 de pixeli pt un picturebox de 500x500
+                int tmp = y * 50;//ajuta la schimbarea cadranului IV -> I sa nu ma complic cu paranteze
+                                 //Y va deveni (inaltimea_picturebox-ului - Y)
                 g.DrawLine(p, 0, y * 50, pictureBox1.Size.Width * 50, y * 50);
+                // eticheta 
                 g.DrawString((pictureBox1.Size.Height - tmp).ToString(), this.Font, Brushes.Black, 0, y * 50);
             }
 
-            // "0"
+            // centrul "0"
             g.DrawString("0", this.Font, Brushes.Black, 0, pictureBox1.Height - this.Font.Height);
 
+
+
+            //linii verticale din 50 in 50 de pixeli
             for (int x = 0; x < pictureBox1.Size.Width; ++x)
             {
                 g.DrawLine(p, x * 50, 0, x * 50, pictureBox1.Size.Height * 50);
+                //(pictureBox1.Height - this.Font.Height) = afisare fix deasupra axei OX:
                 if (x != 1) g.DrawString((x * 50).ToString(), this.Font, Brushes.Black, x * 50 - 21, pictureBox1.Height - this.Font.Height);
-                else //hack pt afisare corecta "50"
+                else //hack pt afisare corecta a etichetei "50" pe OX (adica in momentul in care x=1)
                     g.DrawString((x * 50).ToString(), this.Font, Brushes.Black, x * 50 - 15, pictureBox1.Height - this.Font.Height);
 
             }
-            
 
+            //la reset lista cu punctele introduse x1,y1,x2,y2 etc devine vida:
             ptList.Clear();
 
-            //DONE.
-            
+                      
             
         }
 
@@ -164,11 +184,14 @@ namespace Bezier
         }
  */
 
-        //TODO: grid initial:
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        
+        private void pictureBox1_Paint(object sender, PaintEventArgs e) 
+            //daca functia _Paint este comentata atunci designer-ul crapa, trebuie comentata si in sursa Form1.Designer.cs
         {
 
-            //grid:
+            //grid initial
+
+            //
 
             Pen p = new Pen(Color.DarkGray);
             for (int y = 0; y < pictureBox1.Size.Height; ++y)
@@ -191,18 +214,9 @@ namespace Bezier
 
             }
 
-
-
-
-            //g.DrawString(pictureBox1.Width.ToString(), this.Font, Brushes.Black, 0, pictureBox1.Height-20);
-            //g.DrawString(pictureBox1.Height.ToString(), this.Font, Brushes.Black, pictureBox1.Width-20, 0);
         }
 
-        /* daca pictureBox1_Paint e comentata aici atunci trebuie
-         comentata si in Form1.Designer.cs la linia 57 
-         altfel designerul general da eroare.
-        */
-
+     
        
     }
 }

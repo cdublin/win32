@@ -6,6 +6,8 @@ using System.Text;
 namespace Bezier
 
     //TODO: comentat algoritmul  ("Bernstein / De Casteljau")
+
+
 {
     class BezierCurve
     {
