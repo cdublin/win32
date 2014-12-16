@@ -12,7 +12,11 @@ namespace Bezier
     {
         private List<double> ptList = new List<double>();
         private BezierCurve bc = new BezierCurve();
-        char c = 'A'; //eticheta de start a primului punct (probabil mai necesita formatare)
+        char label = 'A';  //eticheta de start a primului punct 
+
+        bool letter=true;    //in cazul in care s-au epuizat literele A-Z
+        int numplabel = 1; //etichetarea incepe de la 1
+        int numpoints = 0;
 
         public Form1()
         {
@@ -31,22 +35,34 @@ namespace Bezier
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
+            numpoints++;
 
-            
+            if (letter == false) //s-au epuizat A-Z
+            {
+                
+                ptList.Add(e.X);
+                ptList.Add(e.Y);
+                g.DrawRectangle(px, new Rectangle(e.X, e.Y, 2, 2));
+                //etichetare varfuri cu cifre dupa epuizarea literelor
+                g.DrawString("P"+numplabel.ToString(), this.Font, Brushes.Black, e.X, e.Y);
+                //eticheta se incrementeaza o data cu fiecare punct 
+                numplabel++;
 
-            if (c == 'Z') MessageBox.Show("A fost atins maximul de puncte. \n Pls Reset sau FIT BEZIER.");
-            //ceea ce e ok, oricum maximul practic este de ~32 de puncte datorita calculului lui n!
+                //label++
 
-            if (c > 'Z') { MessageBox.Show("Resetare automata..."); Reset(); } 
-            //deja al doilea warning pentru utilizator deci reset
+                //TODO: modificat aici totusi sa arate mai decent, A1 in loc de 1 etc
+            }
 
-            ptList.Add(e.X);
-            ptList.Add(e.Y);
-            g.DrawRectangle(px, new Rectangle(e.X, e.Y, 2, 2));
-            // to do: etichetare varfuri cu litere din alfabet consecutive 
-            g.DrawString(c.ToString(), this.Font, Brushes.Black, e.X, e.Y);
-            c++; //eticheta se incrementeaza o data cu fiecare punct A,B,C..
-            
+            else
+            {
+                ptList.Add(e.X);
+                ptList.Add(e.Y);
+                g.DrawRectangle(px, new Rectangle(e.X, e.Y, 2, 2));
+                // to do: etichetare varfuri cu litere din alfabet consecutive 
+                g.DrawString(label.ToString(), this.Font, Brushes.Black, e.X, e.Y);
+                label++; //eticheta se incrementeaza o data cu fiecare punct A,B,C..
+                if (label > 'Z') letter = false; //s-au epuizat A-Z
+            }
         }
 
         //afisare coordonate in status la mouse hover
@@ -95,7 +111,8 @@ namespace Bezier
 
 
             // how many points do you need on the curve?
-            const int POINTS_ON_CURVE = 1000;
+            //const 
+            int POINTS_ON_CURVE = numpoints*100;
 
             double[] ptind = new double[ptList.Count];
             double[] p = new double[POINTS_ON_CURVE];
@@ -148,7 +165,10 @@ namespace Bezier
             //redesenam grid-ul si background-ul
             //in design pictureBox1 ramane fix pls altfel trebuiesc refacute in totalitate for-urile urmatoare:
 
-            c = 'A';
+            label = 'A';
+            numplabel = 1;
+            letter = true;
+            numpoints = 0;
 
             g.Clear(Color.Azure);
 
@@ -199,7 +219,7 @@ namespace Bezier
             //redesenam grid-ul si background-ul
             //in design pictureBox1 ramane fix pls altfel trebuiesc refacute in totalitate for-urile urmatoare:
 
-            c = 'A';
+            label = 'A';
 
             g.Clear(Color.Azure);
 
