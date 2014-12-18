@@ -112,7 +112,9 @@ namespace Bezier
 
             // how many points do you need on the curve?
             //const 
-            int POINTS_ON_CURVE = numpoints*100;
+            //int POINTS_ON_CURVE = numpoints*100;
+            
+            int POINTS_ON_CURVE = 1000;
 
             double[] ptind = new double[ptList.Count];
             double[] p = new double[POINTS_ON_CURVE];
