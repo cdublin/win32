@@ -11,6 +11,7 @@ C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\bin\Release\B
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\bin\Release\Bezier.exe
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\bin\Release\Bezier.pdb
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.Form1.resources
+C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.Form3.resources
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.Properties.Resources.resources
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.csproj.GenerateResource.Cache
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.exe

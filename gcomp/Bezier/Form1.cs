@@ -7,7 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 namespace Bezier
 
-    //TODO: refresh/repaint picturebox la maximimizare/minimizare
+    //TODO: -refresh/repaint picturebox la maximimizare/minimizare
+    //      -tratare exceptii/cazuri limita la toate componentele forumului + tooltip-uri
 
 {
     public partial class Form1 : Form
@@ -18,6 +19,7 @@ namespace Bezier
         bool letter = true;    //in cazul in care s-au epuizat literele A-Z
         int numplabel = 1; //etichetarea incepe de la 1
         int numpoints = 0;
+        
 
         public Form1()
         {
@@ -250,12 +252,7 @@ namespace Bezier
             ptList.Clear();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //form separat aici
-            MessageBox.Show("[TO DO: input] - cu un form separat");
-        }
-
+       
 
         //TODO: (in paint sau nu) antialiasing ceva gen        
         /*
@@ -308,6 +305,37 @@ namespace Bezier
            
             
         }
+
+
+        public static Form3 myForm = null;
+        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //necesar pentru a nu deshide o noua instanta 
+            //de fiecare data cand este apsata "input" :
+            
+            if (myForm != null)
+            {
+                myForm.BringToFront();
+            }
+
+            else
+            {
+                myForm = new Form3();
+                myForm.Show();
+            }
+                
+
+
+                
+
+        }
+
+
+
+
+      
 
         private void button4_Click(object sender, EventArgs e)
         {
