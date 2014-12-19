@@ -15,4 +15,3 @@ C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\B
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.csproj.GenerateResource.Cache
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.exe
 C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.pdb
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Bezier\obj\Release\Bezier.csprojResolveAssemblyReference.cache
