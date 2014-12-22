@@ -11,16 +11,24 @@ namespace Bezier
     //      -tratare exceptii/cazuri limita la toate componentele forumului + tooltip-uri
 
 {
-    public partial class Form1 : Form
+    partial class Form1 : Form
     {
-        private List<double> ptList = new List<double>();
+        //private List<double> ptList = new List<double>();
+        public static List<double> ptList = new List<double>();
+
+        public static Form3 myForm = null;  //form-ul pentru "manual input"
         private BezierCurve bc = new BezierCurve();
+
         char label = 'A';  //eticheta de start a primului punct 
         bool letter = true;    //in cazul in care s-au epuizat literele A-Z
         int numplabel = 1; //etichetarea incepe de la 1
-        int numpoints = 0;
+        int numpoints = 0; //cate puncte au fost introduse 
         
-
+        Pen px = new Pen(Brushes.Red);
+        Pen newpx = new Pen(Brushes.Black);
+        Graphics g;
+        bool needpoligon = false; 
+        
         public Form1()
         {
             InitializeComponent();
@@ -72,8 +80,16 @@ namespace Bezier
                 label++; //eticheta se incrementeaza o data cu fiecare punct A,B,C..
                 if (label > 'Z') letter = false; //s-au epuizat A-Z
             }
-                                //
+                                
         }
+
+        //form3_button1() probabil la fel ca pictureBox1_MouseClick()
+
+        
+
+
+
+
 
         //afisare coordonate in status la mouse hover
         private void pictureBox1_MouseHover(object sender, EventArgs e)
@@ -103,10 +119,7 @@ namespace Bezier
             statusStrip1.Refresh();
         }
 
-        Pen px = new Pen(Brushes.Red);
-        Pen newpx = new Pen(Brushes.Black);
-        Graphics g;
-        bool needpoligon=false;
+
 
 
         //desenare Bezier
@@ -114,7 +127,7 @@ namespace Bezier
         {
             // how many points do you need on the curve?
             //const 
-            int POINTS_ON_CURVE = numpoints * 300;
+            int POINTS_ON_CURVE = 1000;
             double[] p = new double[POINTS_ON_CURVE];
             double[] ptind = new double[ptList.Count];
             ptList.CopyTo(ptind, 0);
@@ -135,13 +148,15 @@ namespace Bezier
 
             /* culori diferite 
             //(optional) 
-            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+            //opuleaa un array cu toate culorile posibile din .net:
+            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor)); 
             Random randomGen = new Random();
-            if (Convert.ToBoolean(checkBox2.Checked))
+            if (Convert.ToBoolean(checkBox2.Checked)) //daca este bifata "colors"
             {
                 KnownColor randomColorName = names[randomGen.Next(names.Length)];
                 Color randomColor = Color.FromKnownColor(randomColorName);
-                newpx.Color = randomColor;
+                newpx.Color = randomColor; 
+                // ia o culoare la intamplare si i-o asigneaza Pen-ului newpx
             }
             else newpx.Color = System.Drawing.Color.Black;
             */
@@ -152,7 +167,7 @@ namespace Bezier
             for (int i = 1; i != POINTS_ON_CURVE - 1; i += 2)
 
             {
-                //trebuie warning aii daca p e vid;
+                //trebuie warning aici daca p e vid;
                 g.DrawRectangle(newpx, new Rectangle((int)p[i + 1], (int)p[i], 1, 1));
                 Application.DoEvents();
             }
@@ -166,6 +181,7 @@ namespace Bezier
         private void Form1_Load(object sender, EventArgs e)
         {
             g = Graphics.FromHwnd(pictureBox1.Handle);
+            //initializare g=handle/pointer la pictureBox1
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -178,17 +194,22 @@ namespace Bezier
             //Reset
             //redesenam grid-ul si background-ul
             //in design pictureBox1 ramane fix pls altfel trebuiesc refacute in totalitate for-urile urmatoare:
+            
+            
+            //necesare pentru etichetare puncte de control:
             label = 'A';
             numplabel = 1;
             letter = true;
             numpoints = 0;
+
+            
             listBox1.Items.Clear();
             g.Clear(Color.Azure);
             
             checkBox2.Checked = false;
             checkBox1.Checked = false;
             checkBox3.Checked = false;
-            //needpoligon = true;
+            //debug: needpoligon = true;
 
             Pen p = new Pen(Color.DarkGray);
             for (int y = 0; y < pictureBox1.Size.Height; ++y)
@@ -254,9 +275,8 @@ namespace Bezier
 
        
 
-        //TODO: (in paint sau nu) antialiasing ceva gen        
+        //optiuni de antialiasing disponibile in .net:     
         /*
-                    //Invalidate();
                     e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                     e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                     e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
@@ -291,7 +311,7 @@ namespace Bezier
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             // mod free hand = mai multe curbe
-            // de fapt e cam optional, deocamdata suprafata de paint e destul e mica.
+            // de fapt e optional, deocamdata suprafata de paint e destul e mica.
             
             ptList.Clear();
         }
@@ -303,11 +323,12 @@ namespace Bezier
             else needpoligon = true;
            //MessageBox.Show(poligon.ToString());
            
+            //la bifare poligon se schimba variabila booleana needpoligon
             
         }
 
 
-        public static Form3 myForm = null;
+        
         
 
         private void button2_Click(object sender, EventArgs e)
@@ -325,22 +346,17 @@ namespace Bezier
                 myForm = new Form3();
                 myForm.Show();
             }
-                
-
-
-                
+           // myForm.Dispose();
 
         }
 
 
-
-
-      
-
+       
         private void button4_Click(object sender, EventArgs e)
         {
             //form separat aici
             MessageBox.Show("[TO DO: modificare coordonate punct] - cu un form separat");
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -353,7 +369,7 @@ namespace Bezier
         {
             //
             //desenare poligon-cadru
-            // mai trebuie testata
+            //mai trebuie testata
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Pen p = new Pen(Color.DarkViolet, 1);
             for (int i = 0; i < ptList.Count - 3; i += 2)

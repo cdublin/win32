@@ -133,7 +133,7 @@ namespace Bezier
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(63, 80);
             this.button2.TabIndex = 8;
-            this.button2.Text = "Input";
+            this.button2.Text = "Manual Input";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -270,7 +270,7 @@ namespace Bezier
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
+        public static System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;

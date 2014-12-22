@@ -10,7 +10,7 @@ namespace Bezier
 {
     //TODO: sanitize input/masked textbox
 
-    public partial class Form3 : Form
+    partial class Form3 : Form
     {
 
         
@@ -30,7 +30,7 @@ namespace Bezier
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //buton reset input
             this.textBox1.Clear();
             this.textBox2.Clear();
         }
@@ -48,9 +48,23 @@ namespace Bezier
         private void button1_Click(object sender, EventArgs e)
         {
         //butonul "OK"
-         this.Close(); //obligatoriu la un moment dat
-        // ar trebui sa introduca in ptlist[] x si y
-        // rescrie valorile existente sau adauga, cu reset() sau nu;
+
+                //manipularea listbox-ului:
+                //listBox1.Items.Add();
+                //listBox1.SelectedIndex = listBox1.Items.Count - 1;  //autoscroll
+                //listBox1.SelectedIndex = -1;  
+
+         
+        /* 
+         ar trebui sa introduca in ptlist[] x si y;
+         deci practic sa faca exact ce face pictureBox1_MouseClick;
+         TODO: ca sa functioneze,
+         variabilele ptlist, label, numpoints etc trebuiesc mutate intr-o clasa separata. 
+        */
+
+
+            this.Close(); //obligatoriu la un moment dat
+
         }
 
 
