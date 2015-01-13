@@ -5,10 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+//using System.Linq;
 namespace Bezier
 
-    //TODO: -refresh/repaint picturebox la maximimizare/minimizare
-    //      -tratare exceptii/cazuri limita la toate componentele forumului + tooltip-uri
+ //TODO: -refresh/repaint picturebox la maximimizare/minimizare
+//      -tratare exceptii/cazuri limita la toate componentele formului + tooltip-uri
+//      -reparat reset(), undeva prin grahamscan.cs ramane ceva initializat dupa stergerea listelor cu .clear()
 
 {
     partial class Form1 : Form
@@ -23,12 +25,15 @@ namespace Bezier
         bool letter = true;    //in cazul in care s-au epuizat literele A-Z
         int numplabel = 1; //etichetarea incepe de la 1
         int numpoints = 0; //cate puncte au fost introduse 
-        
+
+        GrahamScan gs = new GrahamScan();
+        List<PointG> listPointsG = new List<PointG>();
+
         Pen px = new Pen(Brushes.Red);
         Pen newpx = new Pen(Brushes.Black);
         Graphics g;
-        bool needpoligon = false; 
         
+
         public Form1()
         {
             InitializeComponent();
@@ -36,14 +41,14 @@ namespace Bezier
             // &cazuri separate
             ToolTip tp = new ToolTip();
             tp.AutoPopDelay = 2000;
-            tp.SetToolTip(pictureBox1, "click for new points then push 'FIT BEZIER'");
+            tp.SetToolTip(pictureBox1, "click for new points");
         }
 
         //desenare puncte
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             numpoints++;
-           
+
             if (letter == false) //s-au epuizat A-Z
             {
                 ptList.Add(e.X);
@@ -55,9 +60,9 @@ namespace Bezier
 
                 //test populare listbox1, codul de aici va fi in form-ul initiat de button2_Click
                 //TODO: adaugare paddright/left pentru afisare corecta (aliniere)
-                listBox1.Items.Add("P"+numplabel.ToString() + numpoints + ":  x" + e.X + "  y" + (500 - e.Y));
+                listBox1.Items.Add("P" + numplabel.ToString() + numpoints + ":  x" + e.X + "  y" + (500 - e.Y));
                 listBox1.SelectedIndex = listBox1.Items.Count - 1;  //autoscroll
-                listBox1.SelectedIndex = -1;  
+                listBox1.SelectedIndex = -1;
 
                 numplabel++;
                 //label++
@@ -73,19 +78,19 @@ namespace Bezier
 
                 //test populare listbox1, codul de aici va fi in form-ul initiat de button2_Click
                 //TODO: adaugare paddright/left pentru afisare corecta (aliniere)
-                listBox1.Items.Add(label.ToString()+ ":  x" + e.X + "  y" + (500 - e.Y));
+                listBox1.Items.Add(label.ToString() + ":  x" + e.X + "  y" + (500 - e.Y));
                 listBox1.SelectedIndex = listBox1.Items.Count - 1;  //autoscroll
-                listBox1.SelectedIndex = -1;  
+                listBox1.SelectedIndex = -1;
 
                 label++; //eticheta se incrementeaza o data cu fiecare punct A,B,C..
                 if (label > 'Z') letter = false; //s-au epuizat A-Z
             }
-                                
+
         }
 
         //form3_button1() probabil la fel ca pictureBox1_MouseClick()
 
-        
+
 
 
 
@@ -101,7 +106,7 @@ namespace Bezier
             //(pictureBox1.Height - p.Y) = trecerea din cadranul IV (specific gdi+) in cadranul I
             // refresh pentru a nu ramane blocat pe coordonatele precedente
             statusStrip1.Refresh();
-            
+
         }
 
         //afisare coordonate in status la mouse move
@@ -110,7 +115,7 @@ namespace Bezier
             Point p = pictureBox1.PointToClient(Cursor.Position);
             toolStripStatusLabel2.Text = "x = " + p.X.ToString() + " y = " + (pictureBox1.Height - p.Y).ToString();
             statusStrip1.Refresh();
-            
+
         }
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
@@ -118,9 +123,6 @@ namespace Bezier
             toolStripStatusLabel2.Text = "";
             statusStrip1.Refresh();
         }
-
-
-
 
         //desenare Bezier
         private void button1_Click(object sender, EventArgs e)
@@ -132,19 +134,6 @@ namespace Bezier
             double[] ptind = new double[ptList.Count];
             ptList.CopyTo(ptind, 0);
             bc.Bezier2D(ptind, (POINTS_ON_CURVE) / 2, p);
-            //if (Convert.ToBoolean(checkBox2.Checked)) 
-
-           //debug: MessageBox.Show("needpoligon: "+needpoligon.ToString());
-
-
-            if (needpoligon) 
-            { 
-                drawpoligon(); 
-                //needpoligon = false; 
-            }
-            
-            
-            
 
             /* culori diferite 
             //(optional) 
@@ -165,17 +154,14 @@ namespace Bezier
 
             //desenare efectiva punctele curbei Bezier
             for (int i = 1; i != POINTS_ON_CURVE - 1; i += 2)
-
             {
                 //trebuie warning aici daca p e vid;
                 g.DrawRectangle(newpx, new Rectangle((int)p[i + 1], (int)p[i], 1, 1));
                 Application.DoEvents();
             }
 
-
-            // verificare mod free hand = mai multe curbe
-            //daca 'mod free hand' inca e checked atunci lista de coordonate introdusa devine vida
-            if (Convert.ToBoolean(checkBox1.Checked)) ptList.Clear();
+            button1.Enabled = false;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -194,21 +180,21 @@ namespace Bezier
             //Reset
             //redesenam grid-ul si background-ul
             //in design pictureBox1 ramane fix pls altfel trebuiesc refacute in totalitate for-urile urmatoare:
-            
-            
+
+
             //necesare pentru etichetare puncte de control:
             label = 'A';
             numplabel = 1;
             letter = true;
             numpoints = 0;
 
-            
+
             listBox1.Items.Clear();
             g.Clear(Color.Azure);
-            
-            checkBox2.Checked = false;
-            checkBox1.Checked = false;
-            checkBox3.Checked = false;
+
+            //checkBox2.Checked = false;
+            //checkBox1.Checked = false;
+            //checkBox3.Checked = false;
             //debug: needpoligon = true;
 
             Pen p = new Pen(Color.DarkGray);
@@ -271,9 +257,17 @@ namespace Bezier
             }
             //la reset lista cu punctele introduse x1,y1,x2,y2 etc devine vida:
             ptList.Clear();
+
+            gs.result.Clear();
+            gs.order.Clear();
+            //gs.arrSortedInt.Clear();
+
+            listPointsG.Clear();
+
+
         }
 
-       
+
 
         //optiuni de antialiasing disponibile in .net:     
         /*
@@ -308,34 +302,13 @@ namespace Bezier
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            // mod free hand = mai multe curbe
-            // de fapt e optional, deocamdata suprafata de paint e destul e mica.
-            
-            ptList.Clear();
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-           // debug: 
-            if (needpoligon == true) needpoligon = false;
-            else needpoligon = true;
-           //MessageBox.Show(poligon.ToString());
-           
-            //la bifare poligon se schimba variabila booleana needpoligon
-            
-        }
-
-
-        
-        
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
             //necesar pentru a nu deshide o noua instanta 
             //de fiecare data cand este apsata "input" :
-            
+
             if (myForm != null)
             {
                 myForm.BringToFront();
@@ -346,17 +319,17 @@ namespace Bezier
                 myForm = new Form3();
                 myForm.Show();
             }
-           // myForm.Dispose();
+            // myForm.Dispose();
 
         }
 
 
-       
+
         private void button4_Click(object sender, EventArgs e)
         {
             //form separat aici
             MessageBox.Show("[TO DO: modificare coordonate punct] - cu un form separat");
-            
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -365,17 +338,58 @@ namespace Bezier
             MessageBox.Show("[TO DO: delete punct] - cu un form separat");
         }
 
-        private void drawpoligon()
+        
+
+        private void button6_Click(object sender, EventArgs e)
         {
-            //
-            //desenare poligon-cadru
-            //mai trebuie testata
+            //necesare pt paint
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            Pen p = new Pen(Color.DarkViolet, 1);
-            for (int i = 0; i < ptList.Count - 3; i += 2)
+            Pen p = new Pen(Color.DarkOrchid, 2);
+
+
+
+            //se adauga in listPointsG punctele introduse la click()
+            for (int i = 0; i <= ptList.Count - 2; i += 2)
             {
-                g.DrawLine(p, (int)ptList[i], (int)ptList[i + 1], (int)ptList[i + 2], (int)ptList[i + 3]);
+                listPointsG.Add(new PointG((int)ptList[i], (int)ptList[i + 1]));
             }
+
+
+            //se proceseaza listPointsG, multimea punctelor rezultate = result[]
+            gs.convexHull(listPointsG);
+
+            int k = gs.result.Count;//cate elemente sunt in result
+
+            //se traseaza linii intre punctele convex hull
+            for (int i = 0; i < gs.result.Count - 1; i++)
+            {
+                g.DrawLine(p, (int)gs.result[i].x, (int)gs.result[i].y, (int)gs.result[i + 1].x, (int)gs.result[i + 1].y);
+
+            }
+
+            //o ultima linie intre ultimul element din hull si primul (pentru a fi 'inchisa')
+            g.DrawLine(p, (int)gs.result[k - 1].x, (int)gs.result[k - 1].y, (int)gs.result[0].x, (int)gs.result[0].y);
+
+
+            //
+            button6.Enabled = false;
+            button3.Enabled = false;
+
+            
+        }
+
+        void DisableButtons()     
+ 
+//TODO: reparat reset(), undeva prin grahamscan.cs ramane ceva initializat dupa stergerea listelor cu .clear()
+
+
+        {
+            //button1.Enabled = false;
+            //button2.Enabled = false;
+            button3.Enabled = false;
+            //button4.Enabled = false;
+            //button5.Enabled = false;
+            //button6.Enabled = false;
         }
 
 
