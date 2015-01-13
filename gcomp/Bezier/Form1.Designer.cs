@@ -1,4 +1,4 @@
-namespace Bezier
+﻿namespace Bezier
 {
     partial class Form1
     {
@@ -46,6 +46,7 @@ namespace Bezier
             this.button6 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -122,17 +123,19 @@ namespace Bezier
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(534, 468);
+            this.button3.BackColor = System.Drawing.Color.LavenderBlush;
+            this.button3.Enabled = false;
+            this.button3.Location = new System.Drawing.Point(627, 202);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(176, 44);
+            this.button3.Size = new System.Drawing.Size(86, 44);
             this.button3.TabIndex = 7;
             this.button3.Text = "Reset";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(650, 203);
+            this.button2.Location = new System.Drawing.Point(650, 261);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(63, 80);
             this.button2.TabIndex = 8;
@@ -143,7 +146,7 @@ namespace Bezier
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(534, 203);
+            this.listBox1.Location = new System.Drawing.Point(534, 261);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(110, 251);
             this.listBox1.TabIndex = 9;
@@ -172,7 +175,7 @@ namespace Bezier
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(650, 289);
+            this.button4.Location = new System.Drawing.Point(650, 347);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(63, 80);
             this.button4.TabIndex = 12;
@@ -182,7 +185,7 @@ namespace Bezier
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(650, 375);
+            this.button5.Location = new System.Drawing.Point(650, 433);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(63, 79);
             this.button5.TabIndex = 13;
@@ -222,12 +225,25 @@ namespace Bezier
             this.label6.TabIndex = 18;
             this.label6.Text = "------";
             // 
+            // button7
+            // 
+            this.button7.Enabled = false;
+            this.button7.Font = new System.Drawing.Font("Calibri", 11.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(534, 202);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(86, 44);
+            this.button7.TabIndex = 19;
+            this.button7.Text = "Triang";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(733, 561);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button6);
@@ -249,7 +265,7 @@ namespace Bezier
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bezier";
+            this.Text = "GComp";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
@@ -278,6 +294,7 @@ namespace Bezier
         public System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

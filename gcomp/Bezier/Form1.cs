@@ -8,9 +8,10 @@ using System.Windows.Forms;
 //using System.Linq;
 namespace Bezier
 
- //TODO: -refresh/repaint picturebox la maximimizare/minimizare
+ //TODO: 
 //      -tratare exceptii/cazuri limita la toate componentele formului + tooltip-uri
 //      -reparat reset(), undeva prin grahamscan.cs ramane ceva initializat dupa stergerea listelor cu .clear()
+ //       (-numerotare triunghiuri, eventual cu I, II, II etc - optional)
 
 {
     partial class Form1 : Form
@@ -28,6 +29,9 @@ namespace Bezier
 
         GrahamScan gs = new GrahamScan();
         List<PointG> listPointsG = new List<PointG>();
+        int triang = 0;
+
+        Bitmap DrawArea;
 
         Pen px = new Pen(Brushes.Red);
         Pen newpx = new Pen(Brushes.Black);
@@ -39,6 +43,8 @@ namespace Bezier
             InitializeComponent();
             //TODO: functie separata pt tooltip apelabila in pictureBox1_Mouse[...]
             // &cazuri separate
+            DrawArea = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
+            pictureBox1.Image = DrawArea;
             ToolTip tp = new ToolTip();
             tp.AutoPopDelay = 2000;
             tp.SetToolTip(pictureBox1, "click for new points");
@@ -47,15 +53,20 @@ namespace Bezier
         //desenare puncte
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            numpoints++;
+            g = Graphics.FromImage(DrawArea); //incarca tot ce a fost desenat inainte
 
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            numpoints++;
+            Font drawFont = new Font("Arial", 13);
             if (letter == false) //s-au epuizat A-Z
             {
+
                 ptList.Add(e.X);
                 ptList.Add(e.Y);
                 g.DrawRectangle(px, new Rectangle(e.X, e.Y, 2, 2));
                 //etichetare varfuri cu cifre dupa epuizarea literelor
-                g.DrawString("P" + numplabel.ToString(), this.Font, Brushes.Black, e.X, e.Y);
+                g.DrawString("P" + numplabel.ToString(), drawFont, Brushes.Black, e.X, e.Y);
                 //eticheta se incrementeaza o data cu fiecare punct 
 
                 //test populare listbox1, codul de aici va fi in form-ul initiat de button2_Click
@@ -73,8 +84,10 @@ namespace Bezier
                 ptList.Add(e.X);
                 ptList.Add(e.Y);
                 g.DrawRectangle(px, new Rectangle(e.X, e.Y, 2, 2));
+
+                
                 // to do: etichetare varfuri cu litere din alfabet consecutive 
-                g.DrawString(label.ToString(), this.Font, Brushes.Black, e.X, e.Y);
+                g.DrawString(label.ToString(), drawFont, Brushes.Black, e.X, e.Y);
 
                 //test populare listbox1, codul de aici va fi in form-ul initiat de button2_Click
                 //TODO: adaugare paddright/left pentru afisare corecta (aliniere)
@@ -86,15 +99,12 @@ namespace Bezier
                 if (label > 'Z') letter = false; //s-au epuizat A-Z
             }
 
+
+            pictureBox1.Image = DrawArea; //salveaza ce s-a desenat aici()
+
         }
 
         //form3_button1() probabil la fel ca pictureBox1_MouseClick()
-
-
-
-
-
-
 
         //afisare coordonate in status la mouse hover
         private void pictureBox1_MouseHover(object sender, EventArgs e)
@@ -134,7 +144,9 @@ namespace Bezier
             double[] ptind = new double[ptList.Count];
             ptList.CopyTo(ptind, 0);
             bc.Bezier2D(ptind, (POINTS_ON_CURVE) / 2, p);
-
+            g = Graphics.FromImage(DrawArea);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             /* culori diferite 
             //(optional) 
             //opuleaa un array cu toate culorile posibile din .net:
@@ -151,7 +163,6 @@ namespace Bezier
             */
 
 
-
             //desenare efectiva punctele curbei Bezier
             for (int i = 1; i != POINTS_ON_CURVE - 1; i += 2)
             {
@@ -162,11 +173,14 @@ namespace Bezier
 
             button1.Enabled = false;
             
+            pictureBox1.Image = DrawArea;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            g = Graphics.FromHwnd(pictureBox1.Handle);
+            //g = Graphics.FromHwnd(pictureBox1.Handle);
+            g = Graphics.FromImage(DrawArea);
             //initializare g=handle/pointer la pictureBox1
         }
 
@@ -176,11 +190,17 @@ namespace Bezier
 
         private void button3_Click(object sender, EventArgs e)
         {
+            
+            //pictureBox1.InitialImage = null;
+
+            //g = Graphics.FromImage(DrawArea);
+
+            g = Graphics.FromHwnd(pictureBox1.Handle); //necesar pt reset
+
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             //Reset
             //redesenam grid-ul si background-ul
             //in design pictureBox1 ramane fix pls altfel trebuiesc refacute in totalitate for-urile urmatoare:
-
 
             //necesare pentru etichetare puncte de control:
             label = 'A';
@@ -221,7 +241,11 @@ namespace Bezier
             }
             //la reset lista cu punctele introduse x1,y1,x2,y2 etc devine vida:
             ptList.Clear();
-            
+
+            //reinitializare suport DrawArea sa salvam grid-ul (doar la reset)
+            DrawArea = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
+
+            pictureBox1.Image = DrawArea;
         }
 
         private void Reset()
@@ -342,9 +366,13 @@ namespace Bezier
 
         private void button6_Click(object sender, EventArgs e)
         {
+
+
+            g = Graphics.FromImage(DrawArea);
+
             //necesare pt paint
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            Pen p = new Pen(Color.DarkOrchid, 2);
+            Pen p = new Pen(Color.DarkOrchid, 1);
 
 
 
@@ -370,12 +398,15 @@ namespace Bezier
             //o ultima linie intre ultimul element din hull si primul (pentru a fi 'inchisa')
             g.DrawLine(p, (int)gs.result[k - 1].x, (int)gs.result[k - 1].y, (int)gs.result[0].x, (int)gs.result[0].y);
 
+            triang = 1;
+            button7.Enabled = true;
 
             //
             button6.Enabled = false;
             button3.Enabled = false;
+            if (gs.result.Count < 3) button7.Enabled = false;
 
-            
+            pictureBox1.Image = DrawArea;
         }
 
         void DisableButtons()     
@@ -386,10 +417,29 @@ namespace Bezier
         {
             //button1.Enabled = false;
             //button2.Enabled = false;
-            button3.Enabled = false;
+            //button3.Enabled = false;
             //button4.Enabled = false;
             //button5.Enabled = false;
             //button6.Enabled = false;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //triangulare triviala, ar trebui prin ear clipping
+            //TODO(?)
+            g = Graphics.FromImage(DrawArea);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Pen p = new Pen(Color.Green, 1);
+            int k = 0;
+            if (triang == 1)
+            {
+                for (int i = 2; i < gs.result.Count - 1; i++)
+                {
+                    g.DrawLine(p, (int)gs.result[k].x, (int)gs.result[k].y, (int)gs.result[i].x, (int)gs.result[i].y);
+
+                }
+            }
+            pictureBox1.Image = DrawArea;
         }
 
 
