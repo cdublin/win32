@@ -14,11 +14,13 @@ namespace Bezier
  //       (-numerotare triunghiuri, eventual cu I, II, II etc - optional)
 
 {
+     
+
     partial class Form1 : Form
     {
         //private List<double> ptList = new List<double>();
         public static List<double> ptList = new List<double>();
-
+        public static int xm, ym;
         public static Form3 myForm = null;  //form-ul pentru "manual input"
         private BezierCurve bc = new BezierCurve();
 
@@ -36,6 +38,8 @@ namespace Bezier
         Pen px = new Pen(Brushes.Red);
         Pen newpx = new Pen(Brushes.Black);
         Graphics g;
+
+        
         
 
         public Form1()
@@ -103,6 +107,70 @@ namespace Bezier
             pictureBox1.Image = DrawArea; //salveaza ce s-a desenat aici()
 
         }
+
+        //desenare puncte la button1click() din form3
+
+        void Form3_ButtonClickAction(object sender, EventArgs e)
+        {
+
+            {
+                g = Graphics.FromImage(DrawArea); //incarca tot ce a fost desenat inainte
+
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                numpoints++;
+                Font drawFont = new Font("Arial", 13);
+                if (letter == false) //s-au epuizat A-Z
+                {
+
+                    ptList.Add(xm);
+                    ptList.Add(ym);
+                    g.DrawRectangle(px, new Rectangle(xm, ym, 2, 2));
+                    //etichetare varfuri cu cifre dupa epuizarea literelor
+                    g.DrawString("P" + numplabel.ToString(), drawFont, Brushes.Black, xm, ym);
+                    //eticheta se incrementeaza o data cu fiecare punct 
+
+                    //test populare listbox1, codul de aici va fi in form-ul initiat de button2_Click
+                    //TODO: adaugare paddright/left pentru afisare corecta (aliniere)
+                    listBox1.Items.Add("P" + numplabel.ToString() + numpoints + ":  x" + xm + "  y" + (500 - ym));
+                    listBox1.SelectedIndex = listBox1.Items.Count - 1;  //autoscroll
+                    listBox1.SelectedIndex = -1;
+
+                    numplabel++;
+                    //label++
+                    //TODO: modificat aici totusi sa arate mai decent, A1 in loc de 1 etc
+                }
+                else
+                {
+                    ptList.Add(xm);
+                    ptList.Add(ym);
+                    g.DrawRectangle(px, new Rectangle(xm, ym, 2, 2));
+
+
+                    // to do: etichetare varfuri cu litere din alfabet consecutive 
+                    g.DrawString(label.ToString(), drawFont, Brushes.Black, xm, ym);
+
+                    //test populare listbox1, codul de aici va fi in form-ul initiat de button2_Click
+                    //TODO: adaugare paddright/left pentru afisare corecta (aliniere)
+                    listBox1.Items.Add(label.ToString() + ":  x" + xm + "  y" + (500 - ym));
+                    listBox1.SelectedIndex = listBox1.Items.Count - 1;  //autoscroll
+                    listBox1.SelectedIndex = -1;
+
+                    label++; //eticheta se incrementeaza o data cu fiecare punct A,B,C..
+                    if (label > 'Z') letter = false; //s-au epuizat A-Z
+                }
+
+
+                pictureBox1.Image = DrawArea; //salveaza ce s-a desenat aici()
+
+            }
+        }
+
+
+
+
+
+
 
         //form3_button1() probabil la fel ca pictureBox1_MouseClick()
 
@@ -242,6 +310,16 @@ namespace Bezier
             //la reset lista cu punctele introduse x1,y1,x2,y2 etc devine vida:
             ptList.Clear();
 
+            gs.result.Clear();
+            gs.order.Clear();
+            //gs.arrSortedInt.Clear();
+
+            listPointsG.Clear();
+
+            button1.Enabled = true;
+            button6.Enabled = true;
+
+
             //reinitializare suport DrawArea sa salvam grid-ul (doar la reset)
             DrawArea = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
 
@@ -282,11 +360,14 @@ namespace Bezier
             //la reset lista cu punctele introduse x1,y1,x2,y2 etc devine vida:
             ptList.Clear();
 
-            gs.result.Clear();
-            gs.order.Clear();
-            //gs.arrSortedInt.Clear();
+            //gs.result.Clear();
+            //gs.order.Clear();
+            ////gs.arrSortedInt.Clear();
 
-            listPointsG.Clear();
+            //listPointsG.Clear();
+
+            //button1.Enabled = true;
+            //button6.Enabled = true;
 
 
         }
@@ -341,6 +422,9 @@ namespace Bezier
             else
             {
                 myForm = new Form3();
+
+                myForm.PerformForm1Click += new EventHandler(Form3_ButtonClickAction);
+
                 myForm.Show();
             }
             // myForm.Dispose();
@@ -367,6 +451,7 @@ namespace Bezier
         private void button6_Click(object sender, EventArgs e)
         {
 
+            button7.Enabled = true;
 
             g = Graphics.FromImage(DrawArea);
 
@@ -399,29 +484,19 @@ namespace Bezier
             g.DrawLine(p, (int)gs.result[k - 1].x, (int)gs.result[k - 1].y, (int)gs.result[0].x, (int)gs.result[0].y);
 
             triang = 1;
-            button7.Enabled = true;
+            
 
             //
-            button6.Enabled = false;
-            button3.Enabled = false;
+            //
+            //button3.Enabled = false;
             if (gs.result.Count < 3) button7.Enabled = false;
 
             pictureBox1.Image = DrawArea;
+
+            button6.Enabled = false;
         }
 
-        void DisableButtons()     
- 
-//TODO: reparat reset(), undeva prin grahamscan.cs ramane ceva initializat dupa stergerea listelor cu .clear()
-
-
-        {
-            //button1.Enabled = false;
-            //button2.Enabled = false;
-            //button3.Enabled = false;
-            //button4.Enabled = false;
-            //button5.Enabled = false;
-            //button6.Enabled = false;
-        }
+        
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -440,6 +515,9 @@ namespace Bezier
                 }
             }
             pictureBox1.Image = DrawArea;
+
+            button7.Enabled = false;
+            
         }
 
 

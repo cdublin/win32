@@ -124,7 +124,6 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.LavenderBlush;
-            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(627, 202);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(86, 44);
