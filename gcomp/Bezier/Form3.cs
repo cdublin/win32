@@ -9,8 +9,7 @@ using System.Windows.Forms;
 
 namespace Bezier
 {
-    //TODO: sanitize input/masked textbox
-
+    
     partial class Form3 : Form
     {
 
@@ -20,10 +19,8 @@ namespace Bezier
         {
             InitializeComponent();
         }
-
-        
+    
     //
- 
 
         private void Form_KeyDown(object sender, KeyEventArgs e)
         {
@@ -36,16 +33,10 @@ namespace Bezier
         private void button2_Click(object sender, EventArgs e)
         {
 
-         
-
-
             //buton reset input
             this.textBox1.Clear();
             this.textBox2.Clear();
         }
-
-
-
 
         //necesar pentru a nu deshide o noua instanta de fiecare data cand este apsata "input"
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
@@ -59,16 +50,41 @@ namespace Bezier
        
             Form1.xm=Int32.Parse(textBox1.Text);
             Form1.ym = 500-Int32.Parse(textBox2.Text);
+          
+          if ((Form1.xm>=0&&Form1.xm<=500)&&(Form1.ym>=0&&Form1.ym<=500))
+
+          {
 
             EventHandler handler = this.PerformForm1Click;
             if (handler != null)
                 handler(this, EventArgs.Empty);
 
+            this.Close(); 
+          }
 
+          else {
 
-            this.Close(); //obligatoriu la un moment dat
+              //MessageBox.Show();
+             MessageBox.Show("X and/or Y invalid", "Input Error", 
+                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+     
+
+          }
 
         }
+
+        
+    private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+    }
+
+    private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+    {
+    e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar); 
+    }
+
 
 
         

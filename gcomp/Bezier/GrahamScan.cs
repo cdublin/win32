@@ -29,17 +29,15 @@ namespace Bezier
 
     public class GrahamScan
     {
-        const int TURN_LEFT = 1;
-        const int TURN_RIGHT = -1;
-        const int TURN_NONE = 0;
-
+        const int left = 1;
+        
         //liste de puncte publice pentru a fi afectate de reset // TODO: reparat reset()
 
         public List<PointG> result = new List<PointG>();
         public List<PointG> order = new List<PointG>();
 
         //test de orientare clasic Delta(p,q,r)
-        //mai multe detalii in cursul pdf de geometrie de pe grup 2014-2015, pag 4 in partea de jos.
+        
 
         public int turn(PointG p, PointG q, PointG r)
         {
@@ -53,7 +51,7 @@ namespace Bezier
             //un viraj la stanga. daca nu, se elimina ultimul element din hull pana conditia este indeplinita.
             //(sau pana hull este vida atunci r e default acceptat)
 
-            while (hull.Count > 1 && turn(hull[hull.Count - 2], hull[hull.Count - 1], r) != TURN_LEFT)
+            while (hull.Count > 1 && turn(hull[hull.Count - 2], hull[hull.Count - 1], r) != left)
             {
 
                 hull.RemoveAt(hull.Count - 1);
@@ -79,7 +77,7 @@ namespace Bezier
 
 
         public List<PointG> MergeSort(PointG p0, List<PointG> arrPoint)
-        //probabil inlocuita cu qsort(....) insa mergesort e mai eficienta pe liste
+        //mai eficienta pe liste
         {
             if (arrPoint.Count == 1)
             {
@@ -107,9 +105,8 @@ namespace Bezier
                 }
                 else if (getAngle(p0, leftArray[leftptr]) < getAngle(p0, rightArray[rightptr]))
 
-                //"arrSortedInt va contine punctele ordonate dupa unghiurile polare in jurul lui p0"
-                //(Cormen RO pag. 771 - scanarea Graham)
-                {
+                //arrSortedInt va contine punctele ordonate dupa unghiurile polare in jurul lui p0
+                          {
                     arrSortedInt.Add(leftArray[leftptr]);
                     leftptr++;
                 }

@@ -24,3 +24,4 @@ C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.Form1.resour
 C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.Form3.resources
 C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.Properties.Resources.resources
 C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.csproj.GenerateResource.Cache
+C:\Users\cosmin\Documents\git\win32\gcomp\Bezier\obj\Release\Bezier.csprojResolveAssemblyReference.cache

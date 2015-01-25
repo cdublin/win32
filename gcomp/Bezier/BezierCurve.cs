@@ -3,12 +3,11 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Text;
 namespace Bezier
-    //TODO: comentat in intregime algoritmul  ("Forma Bernstein a curbelor Bezier")
-    //done oarecum.
+    
 {
     class BezierCurve
     {
-        //inlocuit tot ce tine de calculul factorial! cu formula lui Stirling.
+        //precizie 1/12n si nu mai exista restrictie la nr de puncte introduse
         private double factorialS(int n)
         {
             double Stirling;
@@ -16,74 +15,79 @@ namespace Bezier
             else Stirling = (Math.Sqrt(2 * Math.PI * n)) * (Math.Pow((n / Math.E), n));
             return Stirling;
         }
-        //mai eficient si nu mai exista restrictie la n (nr de puncte introduse)
-        //   N!/(i!*(n-i)!)
-
-
+        
         //calculeaza n!/(i!*(n-i)!)
-        private double Ni(int n, int i)
+        private double raport(int n, int i)
         {
-            double ni;
+            double temp;
             double a1 = factorialS(n);
             double a2 = factorialS(i);
             double a3 = factorialS(n - i);
-            ni =  a1/ (a2 * a3);
-            return ni;
+            temp =  a1/ (a2 * a3);
+            return temp;
         }
 
-        // Calculate Bernstein basis
+        //
         private double Bernstein(int n, int i, double t)
         {
-            double basis;
-            double ti; /* t^i */
-            double tni; /* (1 - t)^(n-i) */
-            /* Prevent problems with pow */
+            double baza;
+            double t_pow_i; /* t^i */
+            double t_pow_ni; /* (1 - t)^(n-i) */
+            
+
+            //daca exponentul este nul:
             if (t == 0.0 && i == 0) 
-                ti = 1.0; 
+                t_pow_i = 1.0; 
             else 
-                ti = Math.Pow(t, i);
+                t_pow_i = Math.Pow(t, i);
+
             if (n == i && t == 1.0) 
-                tni = 1.0; 
+                t_pow_ni = 1.0; 
             else 
-                tni = Math.Pow((1 - t), (n - i));
-            //Bernstein basis
-            basis = Ni(n, i) * ti * tni; 
-            return basis;
+                t_pow_ni = Math.Pow((1 - t), (n - i));
+            
+            baza = raport(n, i) * t_pow_i * t_pow_ni; 
+            return baza;
         }
 
 
         /*
-        Bezier2D()
         populeaza p cu coordonatele punctelor curbei in ordine
         x1,y1,x2,y2 etc
-        primeste b=punctele introduse x1,y1,x2,y2...
+
+        primeste b=punctele introduse 
+        x1,y1,x2,y2...
+
         si cpts = din cate puncte este formata curba
         */
-        public void Bezier2D(double[] b, int cpts, double[] p)
+
+
+        public void points2bezier(double[] b, int cpts, double[] p)
         {
             int npts = (b.Length) / 2;
-            int icount, jcount;
-            double step, t;
-            // Calculate points on curve
-            icount = 0;
-            t = 0;
-            step = (double)1.0 / (cpts - 1);
-            for (int i1 = 0; i1 != cpts; i1++)
-            { 
-                if ((1.0 - t) < 5e-6) 
-                    t = 1.0;
-                jcount = 0;
-                p[icount] = 0.0;
-                p[icount + 1] = 0.0;
-                for (int i = 0; i != npts; i++)
+            int ib; //iterator pentru punctele bezier
+            int ip; //iterator pentru punctele de intrare
+            double t_step, t;
+             
+            ib = 0;
+            t = 0; //care parcurge [0,1]
+            t_step = (double)1.0 / (cpts - 1); //..cu pasul 1/("nr_de_puncte_pe_curba"-1)
+
+            for (int i1 = 0; i1 != cpts; i1++) //pentru fiecare punct al curbei
+            {
+                if ((1.0 - t) < 1e-6) t = 1.0; // limita minima 10^-6
+                ip = 0;
+                p[ib] = 0.0;
+                p[ib + 1] = 0.0;
+                for (int i = 0; i != npts; i++) //pentru fiecare punct de intrare
                 {
-                    double basis = Bernstein(npts - 1, i, t);
-                    p[icount] += basis * b[jcount];
-                    p[icount + 1] += basis * b[jcount + 1];
-                    jcount = jcount +2;
+                    double baza = Bernstein(npts - 1, i, t);
+                    p[ib] += baza * b[ip];
+                    p[ib + 1] += baza * b[ip + 1];
+                    ip = ip +2;
                 }
-                icount += 2;
-                t += step;
+                ib += 2;
+                t += t_step;
             }
         }
 

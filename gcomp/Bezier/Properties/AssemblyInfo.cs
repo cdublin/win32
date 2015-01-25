@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("ProiectGeometrieComputationala")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("UB")]
-[assembly: AssemblyProduct("Bezier")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyProduct("Bezier&&")]
+[assembly: AssemblyCopyright("Cosmin N.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
