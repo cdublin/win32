@@ -1,8 +1,0 @@
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\bin\Debug\Curves.exe
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\bin\Debug\Curves.pdb
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Debug\Curves.csprojResolveAssemblyReference.cache
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Debug\Curves.Form1.resources
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Debug\Curves.Properties.Resources.resources
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Debug\Curves.csproj.GenerateResource.Cache
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Debug\Curves.exe
-C:\Users\cosmin\Desktop\bezier y=f(cli)\BezierCurves\Curves\Curves\obj\Debug\Curves.pdb

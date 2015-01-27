@@ -157,7 +157,7 @@ namespace Bezier
             }
         }
 
-
+        
 
         //afisare coordonate in status la mouse hover
         private void pictureBox1_MouseHover(object sender, EventArgs e)

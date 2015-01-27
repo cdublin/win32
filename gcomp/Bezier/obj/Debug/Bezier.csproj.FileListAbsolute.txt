@@ -1,0 +1,10 @@
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\Bezier.Form1.resources
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\Bezier.Properties.Resources.resources
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\Bezier.csproj.GenerateResource.Cache
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\Bezier.Form3.resources
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\bin\Debug\Bezier.exe
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\bin\Debug\Bezier.pdb
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\Bezier.exe
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\obj\Debug\Bezier.pdb
+C:\Users\cosmin\Documents\Visual Studio 2008\Projects\Bezier\Bezier\bin\Debug\Bezier.exe.config
