@@ -12,10 +12,12 @@ namespace Bezier
         public int y;
         public int x;
         public PointG(int _x, int _y)
-        {
+        {//setter
             x = _x;
             y = _y;
         }
+
+        //getters:
         public int getX()
         {
             return x;

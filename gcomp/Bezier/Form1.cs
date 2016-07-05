@@ -294,7 +294,7 @@ namespace Bezier
             for (int y = 0; y < pictureBox1.Size.Height; ++y)
             {
                 // linii orizontale din 50 in 50 de pixeli pt un picturebox de 500x500
-                int tmp = y * 50;//ajuta la schimbarea cadranului IV -> I sa nu ma complic cu paranteze
+                int tmp = y * 50;//ajuta la schimbarea cadranului IV -> I 
                 //Y va deveni (inaltimea_picturebox-ului - Y)
                 g.DrawLine(p, 0, y * 50, pictureBox1.Size.Width * 50, y * 50);
                 // eticheta 
@@ -420,7 +420,7 @@ namespace Bezier
         private void button2_Click(object sender, EventArgs e)
         {
             //necesar pentru a nu deshide o noua instanta 
-            //de fiecare data cand este apsata "input" :
+            //de fiecare data cand este apasat "input" :
 
             if (myForm != null)
             {

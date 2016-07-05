@@ -33,9 +33,7 @@ namespace Bezier
             double baza;
             double t_pow_i; /* t^i */
             double t_pow_ni; /* (1 - t)^(n-i) */
-            
-
-            //daca exponentul este nul:
+           //daca exponentul este nul:
             if (t == 0.0 && i == 0) 
                 t_pow_i = 1.0; 
             else 
